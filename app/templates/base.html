@@ -1,0 +1,18 @@
+{% extends 'bootstrap/base.html' %}
+
+{% block head %}
+    {{ super() }}
+    {% include 'includes/_head.html' %}
+{% endblock %}
+{% block styles %}
+    {{ super() }}
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" rel="stylesheet" >
+{% endblock styles %}
+{% block content %}
+    <header>{% block header %}{% endblock %}</header>
+{% endblock %}
+{% block footer %}
+    <footer>
+        Copyright 2018 by <a href="#">ucredit</a>
+    </footer>
+{% endblock %}
