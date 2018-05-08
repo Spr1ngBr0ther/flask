@@ -8,8 +8,18 @@
     {{ super() }}
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" rel="stylesheet" >
 {% endblock styles %}
+{% block navbar %}
+    {# { nav.top.render() }} #}
+    {% include 'includes/_navbar.html' %}
+{% endblock %}
 {% block content %}
-    <header>{% block header %}{% endblock %}</header>
+    {% block header %}
+        <header>
+            <div class="page-header">
+                <h1>{{ title }}</h1>
+            </div>
+        </header>
+    {% endblock %}
 {% endblock %}
 {% block footer %}
     <footer>
