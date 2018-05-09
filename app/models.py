@@ -26,6 +26,7 @@ class User(UserMixin, db.Model):
 
     posts = db.relationship('Post', backref='author')
 
+
     @staticmethod
     def on_created(target, value, oldvalue, initiator):
         target.role = Role.query.filter_by(name='Guests').first()
