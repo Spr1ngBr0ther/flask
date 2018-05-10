@@ -68,3 +68,4 @@ class Comment(db.Model):
     body = db.Column(db.String)
     created = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     post_id = db.Column(db.Integer, db.ForeignKey('posts.id'))
+

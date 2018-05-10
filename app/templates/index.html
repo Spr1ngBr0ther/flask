@@ -6,4 +6,12 @@
     <div class="container">
     <a href="{{ url_for('main.edit') }}" class="btn btn-primary">发表新文章</a>
     </div>
+    <div>
+        {% for post in posts %}
+            <h2><a href="{{ url_for('main.post', id=post.id) }}">{{ post.title }}</a></h2>
+            <div class="container">
+                {{ post.body_html | safe }}
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}

@@ -5,10 +5,13 @@ from flask_sqlalchemy import SQLAlchemy
 from os import path
 import os
 from flask_login import LoginManager
+from flask_pagedown import PageDown
+from flask_gravatar import Gravatar
 
 basedir = path.abspath(path.dirname(__file__))
 bootstrap = Bootstrap()
 db = SQLAlchemy()
+pagedown = PageDown()
 login_manager = LoginManager()
 login_manager.session_protection = 'strong'
 login_manager.login_view = 'auth.login'
@@ -25,6 +28,9 @@ def create_app():
     db.init_app(app)
     bootstrap.init_app(app)
     login_manager.init_app(app)
+    pagedown.init_app(app)
+
+    Gravatar(app, size=64)
 
     from auth import auth as auth_blueprint
     from main import main as main_blueprint

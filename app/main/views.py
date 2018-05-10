@@ -1,5 +1,5 @@
 # coding: utf8
-from flask import render_template, url_for
+from flask import render_template, url_for, redirect
 from . import main
 from ..models import Post, Comment
 from .. import db
@@ -9,7 +9,10 @@ from form import CommentForm, PostForm
 
 @main.route('/')
 def index():
-    return render_template('index.html', title=u'欢迎来到老子的博客')
+    posts = Post.query.all()
+    return render_template('index.html',
+                           title=u'欢迎来到老子的博客',
+                           posts=posts)
 
 
 @main.route('/about')
@@ -36,7 +39,7 @@ def post(id):
 
     return render_template('posts/detail.html',
                            title=post.title,
-                           form=None,
+                           form=form,
                            post=post)
 
 
@@ -57,6 +60,7 @@ def edit(id=0):
         db.session.add(post)
         db.session.commit()  # 保存到库中
 
+        return redirect(url_for('.post', id=post.id))
     title = u'添加新文章'
     if id > 0:
         title = u'编辑 - %' % post.title  # 如果是post，则是编辑
