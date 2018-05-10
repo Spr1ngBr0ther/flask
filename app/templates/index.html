@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
-
-{% block title %}{{ title }}{% endblock %}
+{% from "bootstrap/pagination.html" import render_pagination %}
 
 {% block page_body %}
     <div class="container">
@@ -13,5 +12,11 @@
                 {{ post.body_html | safe }}
             </div>
         {% endfor %}
+
+    {% if pagination %}
+        <div class="pagination">
+        {{ render_pagination(pagination) }}
+        </div>
+    {% endif %}
     </div>
 {% endblock %}

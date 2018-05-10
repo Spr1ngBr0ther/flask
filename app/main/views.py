@@ -1,5 +1,5 @@
 # coding: utf8
-from flask import render_template, url_for, redirect
+from flask import render_template, url_for, redirect, request
 from . import main
 from ..models import Post, Comment
 from .. import db
@@ -9,10 +9,15 @@ from form import CommentForm, PostForm
 
 @main.route('/')
 def index():
-    posts = Post.query.all()
+    # posts = Post.query.all()
+    page_index = request.args.get('page', 1, type=int)
+    query = Post.query.order_by(Post.created.desc())
+    pagination = query.paginate(page_index, per_page=20, error_out=False)
+    posts = pagination.items
     return render_template('index.html',
                            title=u'欢迎来到老子的博客',
-                           posts=posts)
+                           posts=posts,
+                           pagination=pagination)
 
 
 @main.route('/about')
