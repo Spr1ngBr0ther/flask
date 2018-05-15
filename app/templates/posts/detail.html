@@ -2,7 +2,7 @@
 {% import 'bootstrap/wtf.html' as wtf %}
 {% block page_body %}
     <div class="container">
-        <span>作者: {{ post.author.name }}</span> <span>发表日期:{{ post.created }}</span>
+        <span>作者: {{ post.author.name }}</span> <span>{{ _("发表日期") }}:{{ post.created }}</span>
         <hr>
         {# 正文 #}
         <div>
