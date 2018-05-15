@@ -5,6 +5,7 @@ from ..models import Post, Comment
 from .. import db
 from flask_login import login_required, current_user
 from form import CommentForm, PostForm
+from flask_babel import gettext as _
 
 
 @main.route('/')
@@ -15,7 +16,7 @@ def index():
     pagination = query.paginate(page_index, per_page=20, error_out=False)
     posts = pagination.items
     return render_template('index.html',
-                           title=u'欢迎来到老子的博客',
+                           title=_(u'欢迎来到老子的博客'),
                            posts=posts,
                            pagination=pagination)
 
@@ -66,9 +67,9 @@ def edit(id=0):
         db.session.commit()  # 保存到库中
 
         return redirect(url_for('.post', id=post.id))
-    title = u'添加新文章'
+    title = _(u'添加新文章')
     if id > 0:
-        title = u'编辑 - %' % post.title  # 如果是post，则是编辑
+        title = _(u'编辑 - %(title)', title=post.title)  # 如果是post，则是编辑
     return render_template('posts/edit.html',
                            title=title,
                            form=form,
